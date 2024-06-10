@@ -28,4 +28,10 @@ export const defaultTheme = {
   'chale-rosa': '#D74B74',
   'chale-verde': '#9CC766',
   'chale-roxo': '#D9AFE3',
+
+  'classi-azul-800': '#041635',
+  'classi-azul-400': '#1494ff',
+  'classi-azul-300': '#47abff',
+  'classi-azul-200': '#7ac2ff',
+
 }

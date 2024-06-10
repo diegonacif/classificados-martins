@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, ReactNode } from "react";
-import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, getAuth } from "firebase/auth"
+import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth"
 import { auth } from "../services/firebase.config";
 // import { collection, getDocs, setDoc, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -41,6 +41,7 @@ export const AuthGoogleProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSignedIn, setIsSignedIn] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [userState, loading, error] = useAuthState(auth);
 
   useEffect(() => {
