@@ -5,7 +5,7 @@ export const SearchBarContainer = styled.section`
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0 0.75rem ;
+  padding: 0.5rem 0.75rem 0;
 
   height: max-content;
   width: 100vw;
