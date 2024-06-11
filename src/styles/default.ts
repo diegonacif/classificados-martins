@@ -1,6 +1,12 @@
 export const defaultTheme = {
   white: '#FFF',
 
+  'classi-azul-800': '#041635',
+  'classi-azul-400': '#1494ff',
+  'classi-azul-300': '#47abff',
+  'classi-azul-200': '#7ac2ff',
+  'classi-azul-100': '#d8e5f2',
+
   'gray-100': '#FAFAFA',
   'gray-200': '#E1E1E6',
   'gray-300': '#C4C4CC',
@@ -28,10 +34,4 @@ export const defaultTheme = {
   'chale-rosa': '#D74B74',
   'chale-verde': '#9CC766',
   'chale-roxo': '#D9AFE3',
-
-  'classi-azul-800': '#041635',
-  'classi-azul-400': '#1494ff',
-  'classi-azul-300': '#47abff',
-  'classi-azul-200': '#7ac2ff',
-
 }

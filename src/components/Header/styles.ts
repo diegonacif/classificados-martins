@@ -1,15 +1,33 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 0.75rem;
+  display: grid;
+  grid-template-columns: 4rem auto 4rem;
+  grid-template-rows: 100%;
+  padding: 0.5rem 0.75rem;
   height: 4rem;
   width: 100vw;
-  background-color: ${({ theme }) => theme['chale-rosa']};
-
+  background-color: ${({ theme }) => theme['classi-azul-800']};
+  
   .header-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    height: 100%;
+    width: max-content;
+    margin: 0 auto;
+
+    #classi-logo {
+      height: 100%;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 400;
+    }
+  }
+
+  .header-menu-wrapper {
     display: flex;
     align-items: center;
     gap: 0.75rem;

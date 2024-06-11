@@ -6,6 +6,7 @@ export const AdsListContainer = styled.section`
   flex-direction: column;
   align-items: center;
   padding: 1.5rem 0.75rem;
+  background-color: ${({ theme }) => theme['classi-azul-100']};
 `
 
 export const AdsListGrid = styled.div`

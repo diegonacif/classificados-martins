@@ -7,8 +7,8 @@ export function Home() {
   return (
     <>
       <Header />
-      <SearchBar />
       <CategoryNav />
+      <SearchBar />
       <AdsList />
     </>
   )

@@ -23,8 +23,9 @@ export const MenuButtonContainer = styled.div`
     padding: 1rem 0.5rem;
     border-radius: 8px;
 
-    background-color: ${({ theme }) => theme['classi-azul-400']};
-    color: white;
+    background-color: ${({ theme }) => theme['classi-azul-800']};
+    filter: drop-shadow(-2px 2px 3px ${({ theme }) => theme['classi-azul-200']});
+    color: ${({ theme }) => theme['classi-azul-200']};
     font-weight: bold;
 
     hr {

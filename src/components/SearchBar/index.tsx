@@ -1,10 +1,13 @@
-import { SearchBarContainer } from "./styles";
+import { MagnifyingGlass } from "@phosphor-icons/react";
+import { SearchBarContainer, SearchBarInput } from "./styles";
 
 export function SearchBar() {
   return (
     <SearchBarContainer>
-      <span>Pesquise aqui:</span>
-      <input type="text" />
+      <div className="input-wrapper">
+        <SearchBarInput type="text" placeholder="Pesquise aqui..." />
+        <MagnifyingGlass size={24} weight="duotone" />
+      </div>
     </SearchBarContainer>
   )
 }

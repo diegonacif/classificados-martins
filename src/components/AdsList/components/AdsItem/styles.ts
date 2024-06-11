@@ -9,9 +9,9 @@ export const AdsItemContainer = styled.div`
   max-width: 100%;
   height: 20rem;
 
-  background-color: ${({ theme }) => theme['chale-verde']};
+  background-color: ${({ theme }) => theme['gray-100']};
   border-radius: 6px;
-  color: ${({ theme }) => theme['gray-700']};
+  color: ${({ theme }) => theme['classi-azul-800']};
   
   img {
     width: 100%;
