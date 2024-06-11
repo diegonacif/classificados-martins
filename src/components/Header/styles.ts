@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { deviceBreakpoint } from "../../styles/breakpoints";
 
 export const HeaderContainer = styled.section`
   display: grid;
-  grid-template-columns: 4rem auto 4rem;
+  grid-template-columns: 0 auto 4rem;
   grid-template-rows: 100%;
   padding: 0.5rem 0.75rem;
   height: 4rem;
@@ -54,5 +55,9 @@ export const HeaderContainer = styled.section`
 
   svg {
     cursor: pointer;
+  }
+
+  @media ${deviceBreakpoint.tablet} {
+    grid-template-columns: 4rem auto 4rem;
   }
 `
