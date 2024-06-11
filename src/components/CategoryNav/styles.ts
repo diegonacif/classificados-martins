@@ -2,9 +2,12 @@ import styled from "styled-components";
 
 export const CategoryNavContainer = styled.section`
   display: flex;
-  height: 2.5rem;
+  height: max-content;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem 2rem;
+  overflow-x: auto;
 
   background-color: ${({ theme }) => theme['classi-azul-100']};
 

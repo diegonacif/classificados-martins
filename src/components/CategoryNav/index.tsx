@@ -1,14 +1,15 @@
 import { CategoryNavContainer } from "./styles";
+import { CategoryBall } from "./components/CategoryBall";
 
 export function CategoryNav() {
   return (
     <CategoryNavContainer>
-      <button>Category</button>
-      <button>Category</button>
-      <button>Category</button>
-      <button>Category</button>
-      <button>Category</button>
-      <button>Category</button>
+      <CategoryBall />
+      <CategoryBall />
+      <CategoryBall />
+      <CategoryBall />
+      <CategoryBall />
+      <CategoryBall />
     </CategoryNavContainer>
   )
 }
