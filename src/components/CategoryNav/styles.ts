@@ -1,15 +1,23 @@
 import styled from "styled-components";
+import { deviceBreakpoint } from "../../styles/breakpoints";
 
 export const CategoryNavContainer = styled.section`
   display: flex;
   height: max-content;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   gap: 1.5rem;
-  padding: 1rem 2rem;
+  padding: 1rem .75rem;
   overflow-x: auto;
 
   background-color: ${({ theme }) => theme['classi-azul-100']};
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 
   button {
     /* height: 1.75rem;
@@ -24,5 +32,9 @@ export const CategoryNavContainer = styled.section`
     padding: .375rem .5rem;
 
     cursor: pointer;
+  }
+
+  @media ${deviceBreakpoint.tablet} {
+    justify-content: center;
   }
 `
