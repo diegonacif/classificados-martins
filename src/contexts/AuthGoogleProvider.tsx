@@ -41,8 +41,9 @@ export const AuthGoogleProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSignedIn, setIsSignedIn] = useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [userState, loading, error] = useAuthState(auth);
+
+  console.log(userState, error)
 
   useEffect(() => {
     setIsLoading(loading);
