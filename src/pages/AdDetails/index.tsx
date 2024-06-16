@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { AdDetailsAder, AdDetailsCarousel, AdDetailsContainer, AdDetailsDescription, AdDetailsLocation, AdDetailsMainInfo } from "./styles";
-import productExample from "../../assets/productExample.jpg";
+// import productExample from "../../assets/productExample.jpg";
 import { Header } from "../../components/Header";
+import { Carousel } from "../../components/Carousel";
 export function AdDetails() {
   const { adId } = useParams();
 
@@ -10,7 +11,8 @@ export function AdDetails() {
       <Header />
       <AdDetailsContainer>
         <AdDetailsCarousel>
-          <img src={productExample} alt="" />
+          <Carousel />
+          {/* <img src={productExample} alt="" /> */}
         </AdDetailsCarousel>
         <AdDetailsMainInfo>
           <h3>Fiat uno fire todo original sem detalhes {adId}</h3>
