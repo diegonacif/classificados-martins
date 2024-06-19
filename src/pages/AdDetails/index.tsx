@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { AdDetailsAder, AdDetailsCarousel, AdDetailsContainer, AdDetailsDescription, AdDetailsLocation, AdDetailsMainInfo } from "./styles";
+import { AdDetailsAder, AdDetailsCarousel, AdDetailsContainer, AdDetailsDescription, AdDetailsLocation, AdDetailsMainInfo, AdsPill } from "./styles";
 // import productExample from "../../assets/productExample.jpg";
 import { Header } from "../../components/Header";
 import { Carousel } from "../../components/Carousel";
@@ -17,6 +17,9 @@ export function AdDetails() {
         <AdDetailsMainInfo>
           <h3>Fiat uno fire todo original sem detalhes {adId}</h3>
           <span>R$ 18.990</span>
+          <AdsPill>
+            <span>Venda</span>
+          </AdsPill>
         </AdDetailsMainInfo>
         <hr />
         <AdDetailsDescription>

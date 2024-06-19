@@ -82,3 +82,18 @@ export const AdDetailsAder = styled.div`
     margin-top: .75rem;
   }
 `
+
+export const AdsPill = styled.div`
+  display: flex;
+  width: max-content;
+  height: max-content;
+
+  padding: .125rem .5rem;
+  margin-top: .5rem;
+  border-radius: 4px;
+  background-color: ${({ theme }) => theme['gray-200']};
+  
+  span {
+    font-size: .75rem;
+  }
+`
