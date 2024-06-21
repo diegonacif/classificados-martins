@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthGoogleContext } from "../../contexts/AuthGoogleProvider";
 import { MenuButton } from "./components/MenuButton";
 import logoImg from "../../assets/classi-logo.png";
+import { Link } from "react-router-dom";
 
 export function Header() {
   const { 
@@ -16,7 +17,9 @@ export function Header() {
       <div />
       <div className="header-wrapper">
         <img src={logoImg} id="classi-logo" alt="classifacil logo" />
-        <h2>ClassiFácil</h2>
+        <Link to="/">
+          <h2>ClassiFácil</h2>
+        </Link>
       </div>
       <div className="header-menu-wrapper">
         {
