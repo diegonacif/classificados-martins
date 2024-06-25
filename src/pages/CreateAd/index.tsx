@@ -32,7 +32,7 @@ const schema = yup.object().shape({
 });
 
 export function CreateAd() {
-  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<IFormInput>({
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<IFormInput>({
     resolver: yupResolver(schema),
   });
 
