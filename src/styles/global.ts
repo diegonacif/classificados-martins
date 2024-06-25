@@ -8,7 +8,8 @@ export const GlobalStyle = createGlobalStyle`
       -moz-osx-font-smoothing: grayscale;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-      font-family: 'Ubuntu', sans-serif;
+      font-family: "Red Hat Display", sans-serif;
+      font-optical-sizing: auto;
 
       -webkit-tap-highlight-color: ${({ theme }) => theme['chale-rosa']};
 

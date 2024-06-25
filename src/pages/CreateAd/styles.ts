@@ -40,7 +40,7 @@ export const CreateAdContainer = styled.main`
 export const CreateAdInputWrapper = styled.div`
   position: relative;
 
-  label {
+  /* label {
     position: absolute;
     top: 0.25rem;
     left: 0.375rem;
@@ -48,16 +48,9 @@ export const CreateAdInputWrapper = styled.div`
     background-color: white;
     font-weight: 500;
     color: ${({ theme }) => theme['gray-800']};
-  }
+  } */
 
-  input {
-    width: 100%;
-    border-radius: 6px;
-    border: 2px solid ${({ theme }) => theme['gray-200']};
-    padding: 1.5rem 0.375rem 0.25rem;
-    font-size: 1rem;
-    background-color: ${({ theme }) => theme['gray-100']};
-  }
+  
 
   textarea {
     width: 100%;
@@ -69,4 +62,24 @@ export const CreateAdInputWrapper = styled.div`
     font-size: 1rem;
     resize: none;
   }
+`
+
+export const AdInput = styled.input`
+  width: 100%;
+  border-radius: 6px;
+  border: 2px solid ${({ theme }) => theme['gray-200']};
+  padding: 1.25rem .5rem .75rem;
+  font-size: 1rem;
+  background-color: ${({ theme }) => theme['gray-100']};
+`
+
+export const AdInputLabel = styled.label`
+  position: absolute;
+  top: -.55rem;
+  left: .5rem;
+  padding: 0 .25rem;
+  font-size: .875rem;
+  
+  font-weight: 500;
+  background-color: ${({ theme }) => theme['gray-100']};
 `
