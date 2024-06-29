@@ -4,7 +4,7 @@ export const CreateAdContainer = styled.main`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: calc(100dvh - 4rem);
+  height: calc(max-content - 4rem);
 
   background-color: ${({ theme }) => theme['gray-100']};
 
@@ -22,7 +22,7 @@ export const CreateAdContainer = styled.main`
     color: ${({ theme }) => theme['classi-azul-800']};
   }
 
-  button {
+  #submit-button {
     width: 80%;
     height: 2.25rem;
     margin: 0 auto;
@@ -35,22 +35,39 @@ export const CreateAdContainer = styled.main`
     background-color: ${({ theme }) => theme['classi-azul-800']};
     cursor: pointer;
   }
+
+  #images-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: ${({ theme }) => theme['gray-100']};
+    border: 2px solid ${({ theme }) => theme['classi-azul-800']};
+    border-radius: 5px;
+
+    font-size: 1rem;
+    font-weight: 400;
+    color: ${({ theme }) => theme['classi-azul-800']};
+
+    cursor: pointer;
+  }
+
+  #delete-image-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255, 255, 255, 0.6);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+  }
 `
 
 export const CreateAdInputWrapper = styled.div`
   position: relative;
-
-  /* label {
-    position: absolute;
-    top: 0.25rem;
-    left: 0.375rem;
-    font-size: 0.875rem;
-    background-color: white;
-    font-weight: 500;
-    color: ${({ theme }) => theme['gray-800']};
-  } */
-
-  
 
   textarea {
     width: 100%;
@@ -82,4 +99,74 @@ export const AdInputLabel = styled.label`
   
   font-weight: 500;
   background-color: ${({ theme }) => theme['gray-100']};
+`
+
+export const ImgPreviewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 2px solid ${({ theme }) => theme['gray-200']};
+  border-radius: 6px;
+  height: 14.5rem;
+
+  &#grid-version {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 0.75rem;
+
+    #done-icon {
+      margin: auto;
+    }
+  }
+
+  .plus-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: max-content;
+    margin: auto;
+    cursor: pointer;
+
+    span {
+      font-size: .75rem;
+    }
+  }
+
+  .plus-button {
+    position: relative;
+    display: flex;
+    align-items: end;
+    justify-content: left;
+    height: 2.5rem;
+    width: 2.5rem;
+
+    #plus-circle {
+      position: absolute;
+      right: 0;
+      top: 0.125rem;
+    }
+  }
+
+  .preview-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    max-width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    border: 2px solid ${({ theme }) => theme['gray-200']};
+    border-radius: 6px;
+    background-color: ${({ theme }) => theme['gray-200']};
+    overflow: hidden;
+
+    .preview-img {
+      width: 100%;
+      max-width: 100%;
+      height: max-content;
+    }
+  }
 `

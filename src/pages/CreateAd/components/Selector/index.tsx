@@ -26,7 +26,7 @@ export const Selector = ({ handleChanger, cities, selectedCity }: ISelector) => 
         <MenuItem value={''} disabled>Selecione um cidade</MenuItem>
         {
           cities.map((city) => (
-            <MenuItem value={city.label}>{city.label}</MenuItem>
+            <MenuItem value={city.label} key={city.value}>{city.label}</MenuItem>
           ))
         }
       </Select>
