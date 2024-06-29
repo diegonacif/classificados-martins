@@ -25,7 +25,7 @@ export const CreateAdContainer = styled.main`
   #submit-button {
     width: 80%;
     height: 2.25rem;
-    margin: 0 auto;
+    margin: 1rem auto 0;
 
     border: 0;
     border-radius: 6px;
@@ -102,6 +102,7 @@ export const AdInputLabel = styled.label`
 `
 
 export const ImgPreviewContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -168,5 +169,12 @@ export const ImgPreviewContainer = styled.div`
       max-width: 100%;
       height: max-content;
     }
+  }
+
+  #preview-counter {
+    position: absolute;
+    bottom: -1.125rem;
+    left: .5rem;
+    font-size: .75rem;
   }
 `

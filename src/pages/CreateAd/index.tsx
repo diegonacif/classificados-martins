@@ -217,6 +217,7 @@ export function CreateAd() {
                   style={{ display: 'none' }}
                   id="fileInput"
                 />
+                <span id="preview-counter">Fotos 0/3</span>
               </ImgPreviewContainer>
             )
           }
@@ -258,6 +259,7 @@ export function CreateAd() {
                   <CheckCircle size={36} weight="bold" color="#00873d" id="done-icon" />
                 )
               }
+              <span id="preview-counter">Fotos {imagesPreviews.length}/3</span>
             </ImgPreviewContainer>
           )}
 
