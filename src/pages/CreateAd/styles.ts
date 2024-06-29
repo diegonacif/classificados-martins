@@ -78,6 +78,13 @@ export const CreateAdInputWrapper = styled.div`
     padding: 1.5rem 0.375rem 0.25rem;
     font-size: 1rem;
     resize: none;
+    transition: border 0.2s;
+
+    &:focus-visible {
+      outline: 0;
+      border: 2px solid ${({ theme }) => theme['classi-azul-400']};
+      transition: border 0.3s;
+    }
   }
 `
 
@@ -88,6 +95,13 @@ export const AdInput = styled.input`
   padding: 1.25rem .5rem .75rem;
   font-size: 1rem;
   background-color: ${({ theme }) => theme['gray-100']};
+  transition: border 0.2s;
+
+  &:focus-visible {
+    outline: 0;
+    border: 2px solid ${({ theme }) => theme['classi-azul-400']};
+    transition: border 0.3s;
+  }
 `
 
 export const AdInputLabel = styled.label`

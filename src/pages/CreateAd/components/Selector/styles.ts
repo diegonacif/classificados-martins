@@ -13,6 +13,13 @@ export const Select = styled.select`
   background-color: ${({ theme }) => theme['gray-100']};
   border: 2px solid ${({ theme }) => theme['gray-200']};
   border-radius: 6px;
+  transition: border 0.2s;
+
+  &:focus {
+    outline: 0;
+    border: 2px solid ${({ theme }) => theme['classi-azul-400']};
+    transition: border 0.3s;
+  }
 `;
 
 export const SelectLabel = styled.label`
