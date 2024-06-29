@@ -19,7 +19,7 @@ export const Selector = ({ handleChanger, cities, selectedCity }: ISelector) => 
       </SelectLabel>
       <Select
         name="selector"
-        id="demo-simple-select"
+        id={selectedCity === "" ? "no-value-selected" : ""}
         value={selectedCity}
         onChange={(e) => handleChanger(e.target.value)}
       >

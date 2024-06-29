@@ -8,17 +8,21 @@ export const SelectorContainer = styled.div`
 `;
 
 export const Select = styled.select`
-  /* height: 3.5rem; */
   padding: 1.25rem .5rem .75rem;
   background-color: ${({ theme }) => theme['gray-100']};
   border: 2px solid ${({ theme }) => theme['gray-200']};
   border-radius: 6px;
   transition: border 0.2s;
+  font-size: 1rem;
 
   &:focus {
     outline: 0;
     border: 2px solid ${({ theme }) => theme['classi-azul-400']};
     transition: border 0.3s;
+  }
+
+  &#no-value-selected {
+    color: ${({ theme }) => theme['gray-500']};
   }
 `;
 
@@ -34,7 +38,5 @@ export const SelectLabel = styled.label`
 `;
 
 export const MenuItem = styled.option`
-  &:hover {
-    background-color: red;
-  }
+  color: blue;
 `;
