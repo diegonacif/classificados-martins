@@ -1,5 +1,6 @@
 export const defaultTheme = {
   white: '#FFF',
+  'error': '#ff0000',
 
   'classi-azul-800': '#041635',
   'classi-azul-400': '#1494ff',

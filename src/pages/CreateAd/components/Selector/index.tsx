@@ -9,9 +9,10 @@ interface ISelector {
   handleChanger: (selectedOption: string) => void
   cities: OptionType[]
   selectedCity: string
+  error: boolean
 }
 
-export const Selector = ({ handleChanger, cities, selectedCity }: ISelector) => {
+export const Selector = ({ handleChanger, cities, selectedCity, error }: ISelector) => {
   return (
     <SelectorContainer>
       <SelectLabel htmlFor="selector">
@@ -19,7 +20,11 @@ export const Selector = ({ handleChanger, cities, selectedCity }: ISelector) => 
       </SelectLabel>
       <Select
         name="selector"
-        id={selectedCity === "" ? "no-value-selected" : ""}
+        id={
+          error && selectedCity === "" ? "error" :
+          selectedCity === "" ? "no-value-selected" :
+          ""
+        }
         value={selectedCity}
         onChange={(e) => handleChanger(e.target.value)}
       >

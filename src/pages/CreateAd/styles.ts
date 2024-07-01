@@ -102,6 +102,11 @@ export const AdInput = styled.input`
     border: 2px solid ${({ theme }) => theme['classi-azul-400']};
     transition: border 0.3s;
   }
+
+  &.with-error {
+    border: 2px solid ${({ theme }) => theme['error']};
+    transition: border 0.3s;
+  }
 `
 
 export const AdInputLabel = styled.label`
@@ -191,4 +196,10 @@ export const ImgPreviewContainer = styled.div`
     left: .5rem;
     font-size: .75rem;
   }
+`
+
+export const ErrorMsg = styled.p`
+  font-size: .875rem;
+  color: ${({ theme }) => theme['error']};
+  margin-left: .375rem;
 `

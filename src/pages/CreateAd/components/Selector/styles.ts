@@ -24,6 +24,11 @@ export const Select = styled.select`
   &#no-value-selected {
     color: ${({ theme }) => theme['gray-500']};
   }
+
+  &#error {
+    color: ${({ theme }) => theme['gray-500']};
+    border: 2px solid ${({ theme }) => theme['error']};
+  }
 `;
 
 export const SelectLabel = styled.label`

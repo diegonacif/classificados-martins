@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { Timestamp, doc, setDoc } from 'firebase/firestore';
 import { auth, db, storage } from '../../services/firebase.config';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { AdInput, AdInputLabel, CreateAdContainer, CreateAdInputWrapper, ImgPreviewContainer } from './styles';
+import { AdInput, AdInputLabel, CreateAdContainer, CreateAdInputWrapper, ErrorMsg, ImgPreviewContainer } from './styles';
 import { Header } from '../../components/Header';
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
@@ -15,7 +15,7 @@ import { CheckCircle, Images, Plus, Trash } from '@phosphor-icons/react';
 
 interface IFormInput {
   title: string;
-  description: string;
+  description?: string;
   price: number;
   city: string;
   neighborhood?: string;
@@ -27,15 +27,15 @@ interface OptionType {
 }
 
 const schema = yup.object().shape({
-  title: yup.string().required('Title is required'),
-  description: yup.string().required('Description is required'),
-  price: yup.number().required('Price is required').positive('Price must be a positive number'),
-  city: yup.string().required('City is required'),
+  title: yup.string().required('Título precisa ser preenchido'),
+  description: yup.string(),
+  price: yup.number().required('Preço precisa ser informado').positive('Apenas valores positivos'),
+  city: yup.string().required('Cidade precisa ser informado'),
   neighborhood: yup.string(),
 });
 
 export function CreateAd() {
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm<IFormInput>({
+  const { register, handleSubmit, formState: { errors }, setValue, watch, clearErrors } = useForm<IFormInput>({
     resolver: yupResolver(schema),
   });
 
@@ -48,13 +48,7 @@ export function CreateAd() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const MAX_IMAGES = 3;
-
-  console.log({
-    errorMessage,
-    imagesUpload,
-    imagesPreviews,
-  })
+  const MAX_IMAGES = 3; // Número máximo de imagens permitidas
 
   useEffect(() => {
     // Fetch cities for Rio Grande do Norte from IBGE API
@@ -123,6 +117,7 @@ export function CreateAd() {
   const handleCityChange = (selectedOption: string) => {
     setSelectedCity(selectedOption);
     setValue('city', selectedOption ? selectedOption : '');
+    selectedOption.length !== 0 && clearErrors('city')
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -167,20 +162,27 @@ export function CreateAd() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <CreateAdInputWrapper>
             <AdInputLabel>Título</AdInputLabel>
-            <AdInput placeholder='obrigatório' {...register('title')} />
-            {errors.title && <p>{errors.title.message}</p>}
+            <AdInput placeholder='obrigatório' className={errors.title && 'with-error'} {...register('title')} />
+            {errors.title && <ErrorMsg>{errors.title.message}</ErrorMsg>}
           </CreateAdInputWrapper>
 
           <CreateAdInputWrapper>
             <AdInputLabel>Descrição</AdInputLabel>
-            <textarea placeholder='descrição do produto ou serviço' {...register('description')} />
-            {errors.description && <p>{errors.description.message}</p>}
+            <textarea placeholder='descrição do produto ou serviço' className={errors.description && 'with-error'} {...register('description')} />
+            {errors.description && <ErrorMsg>{errors.description.message}</ErrorMsg>}
           </CreateAdInputWrapper>
 
           <CreateAdInputWrapper>
             <AdInputLabel>Preço</AdInputLabel>
-            <AdInput placeholder='obrigatório' type="number" {...register('price')} />
-            {errors.price && <p>{errors.price.message}</p>}
+            <AdInput 
+              placeholder='obrigatório' 
+              type="number" 
+              className={errors.price && 'with-error'}
+              {...register('price', {
+                valueAsNumber: true,
+              })} 
+            />
+            {errors.price && <ErrorMsg>{isNaN(watch('price')) ? 'Preço precisa ser preenchido' : errors.price.message}</ErrorMsg>}
           </CreateAdInputWrapper>
 
           <CreateAdInputWrapper>
@@ -188,16 +190,21 @@ export function CreateAd() {
               handleChanger={handleCityChange}
               cities={cities}
               selectedCity={selectedCity}
+              error={!!errors.city}
             />
+            {errors.city && <ErrorMsg>{errors.city.message}</ErrorMsg>}
           </CreateAdInputWrapper>
 
           <CreateAdInputWrapper>
             <AdInputLabel>Bairro</AdInputLabel>
-            <AdInput placeholder='opcional' {...register('neighborhood')} />
+            <AdInput 
+              placeholder='opcional' 
+              className={errors.neighborhood && 'with-error'}
+              {...register('neighborhood')} 
+            />
             {errors.neighborhood && <p>{errors.neighborhood.message}</p>}
           </CreateAdInputWrapper>
           
-          {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
           {
             imagesPreviews.length === 0 && (
               <ImgPreviewContainer>
@@ -262,6 +269,7 @@ export function CreateAd() {
               <span id="preview-counter">Fotos {imagesPreviews.length}/3</span>
             </ImgPreviewContainer>
           )}
+          {errorMessage && <ErrorMsg>{errorMessage}</ErrorMsg>}
 
           <button type="submit" id="submit-button">Criar anúncio</button>
         </form>
