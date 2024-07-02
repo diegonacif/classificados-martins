@@ -34,6 +34,10 @@ export const CreateAdContainer = styled.main`
     color: ${({ theme }) => theme['classi-azul-100']};
     background-color: ${({ theme }) => theme['classi-azul-800']};
     cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid ${({ theme }) => theme['classi-azul-400']};
+    }
   }
 
   #images-button {
