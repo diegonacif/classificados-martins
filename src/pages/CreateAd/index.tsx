@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Timestamp, doc, setDoc } from 'firebase/firestore';
@@ -12,6 +12,9 @@ import { Selector } from './components/Selector';
 import { v4 as uuid } from 'uuid';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { CheckCircle, Images, Plus, Trash } from '@phosphor-icons/react';
+import { NumericFormat } from 'react-number-format';
+import { LoadingCover } from '../../components/LoadingCover';
+import { useNavigate } from 'react-router-dom';
 
 interface IFormInput {
   title: string;
@@ -35,18 +38,19 @@ const schema = yup.object().shape({
 });
 
 export function CreateAd() {
-  const { register, handleSubmit, formState: { errors }, setValue, watch, clearErrors } = useForm<IFormInput>({
+  const { register, handleSubmit, formState: { errors }, setValue, watch, clearErrors, control } = useForm<IFormInput>({
     resolver: yupResolver(schema),
   });
 
   const [cities, setCities] = useState<OptionType[]>([]);
   const [selectedCity, setSelectedCity] = useState('');
-  // const [imagesUpload, setImagesUpload] = useState<FileList | null>(null);
   const [imagesUpload, setImagesUpload] = useState<File[]>([]);
   const [imagesPreviews, setImagesPreviews] = useState<string[]>([]);
   const [user] = useAuthState(auth);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const MAX_IMAGES = 3; // Número máximo de imagens permitidas
 
@@ -89,6 +93,8 @@ export function CreateAd() {
   };
 
   const onSubmit: SubmitHandler<IFormInput> = async data => {
+    setIsLoading(true);
+
     if (!user) {
       console.error('User not authenticated');
       return;
@@ -109,8 +115,12 @@ export function CreateAd() {
     try {
       await setDoc(doc(db, 'ads', adId), adData);
       console.log('Ad created successfully');
+      setIsLoading(false);
+      navigate("/");
+      
     } catch (error) {
       console.error('Error creating ad: ', error);
+      setIsLoading(false);
     }
   };
 
@@ -153,7 +163,6 @@ export function CreateAd() {
     setImagesPreviews(prevPreviews => prevPreviews.filter((_, i) => i !== index));
   };
 
-
   return (
     <>
       <Header />
@@ -174,14 +183,29 @@ export function CreateAd() {
 
           <CreateAdInputWrapper>
             <AdInputLabel>Preço</AdInputLabel>
-            <AdInput 
-              placeholder='obrigatório' 
-              type="number" 
-              className={errors.price && 'with-error'}
-              {...register('price', {
-                valueAsNumber: true,
-              })} 
+            <Controller 
+              control={control}
+              name='price'
+              render={({ field: { onChange }}) => (
+                <NumericFormat
+                  value={watch('price')}
+                  allowNegative={false}
+                  allowedDecimalSeparators={[',']}
+                  decimalSeparator=','
+                  decimalScale={2}
+                  prefix={'R$ '}
+                  thousandsGroupStyle="lakh"
+                  thousandSeparator="."
+                  fixedDecimalScale
+                  valueIsNumericString={true}
+                  customInput={AdInput}
+                  className={errors.price && 'with-error'}
+                  placeholder='0,00'
+                  onValueChange={(values) => onChange(values.floatValue)}
+                />
+              )}
             />
+
             {errors.price && <ErrorMsg>{isNaN(watch('price')) ? 'Preço precisa ser preenchido' : errors.price.message}</ErrorMsg>}
           </CreateAdInputWrapper>
 
@@ -274,6 +298,7 @@ export function CreateAd() {
           <button type="submit" id="submit-button">Criar anúncio</button>
         </form>
       </CreateAdContainer>
+      { isLoading && <LoadingCover /> }
     </>
   )
 }
