@@ -17,7 +17,7 @@ export const Selector = ({ handleChanger, cities, selectedCity, error, type }: I
   return (
     <SelectorContainer>
       <SelectLabel htmlFor="selector">
-        Cidade
+        {type === 'category' ? 'Categoria' : 'Cidade'}
       </SelectLabel>
       <Select
         name="selector"
