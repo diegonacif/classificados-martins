@@ -79,7 +79,7 @@ export const CreateAdInputWrapper = styled.div`
     height: max-content;
     border-radius: 6px;
     border: 2px solid ${({ theme }) => theme['gray-200']};
-    padding: 1.5rem 0.375rem 0.25rem;
+    padding: 1.5rem 0.375rem 0.5rem;
     font-size: 1rem;
     resize: none;
     transition: border 0.2s;

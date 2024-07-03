@@ -15,6 +15,7 @@ import { CheckCircle, Images, Plus, Trash } from '@phosphor-icons/react';
 import { NumericFormat } from 'react-number-format';
 import { LoadingCover } from '../../components/LoadingCover';
 import { useNavigate } from 'react-router-dom';
+import { categories } from '../../constants/categories';
 
 interface IFormInput {
   title: string;
@@ -22,6 +23,7 @@ interface IFormInput {
   price: number;
   city: string;
   neighborhood?: string;
+  category: string;
 }
 
 interface OptionType {
@@ -35,6 +37,7 @@ const schema = yup.object().shape({
   price: yup.number().required('Preço precisa ser informado').positive('Apenas valores positivos'),
   city: yup.string().required('Cidade precisa ser informado'),
   neighborhood: yup.string(),
+  category: yup.string().required('Categoria precisa ser selecionada'),
 });
 
 export function CreateAd() {
@@ -44,6 +47,7 @@ export function CreateAd() {
 
   const [cities, setCities] = useState<OptionType[]>([]);
   const [selectedCity, setSelectedCity] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [imagesUpload, setImagesUpload] = useState<File[]>([]);
   const [imagesPreviews, setImagesPreviews] = useState<string[]>([]);
   const [user] = useAuthState(auth);
@@ -163,24 +167,45 @@ export function CreateAd() {
     setImagesPreviews(prevPreviews => prevPreviews.filter((_, i) => i !== index));
   };
 
+  const handleCategoryChange = (selectedOption: string) => {
+    setSelectedCategory(selectedOption);
+    setValue('category', selectedOption ? selectedOption : '');
+    selectedOption.length !== 0 && clearErrors('category')
+  };
+
   return (
     <>
       <Header />
       <CreateAdContainer>
         <h2>Crie seu anúncio</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
+          {/* CATEGORY */}
+          <CreateAdInputWrapper>
+            <Selector
+              handleChanger={handleCategoryChange}
+              cities={categories}
+              selectedCity={selectedCategory}
+              error={!!errors.category}
+              type="category"
+            />
+            {errors.category && <ErrorMsg>{errors.category.message}</ErrorMsg>}
+          </CreateAdInputWrapper>
+
+          {/* TITLE */}
           <CreateAdInputWrapper>
             <AdInputLabel>Título</AdInputLabel>
             <AdInput placeholder='obrigatório' className={errors.title && 'with-error'} {...register('title')} />
             {errors.title && <ErrorMsg>{errors.title.message}</ErrorMsg>}
           </CreateAdInputWrapper>
 
+          {/* DESCRIPTION */}
           <CreateAdInputWrapper>
             <AdInputLabel>Descrição</AdInputLabel>
             <textarea placeholder='descrição do produto ou serviço' className={errors.description && 'with-error'} {...register('description')} />
             {errors.description && <ErrorMsg>{errors.description.message}</ErrorMsg>}
           </CreateAdInputWrapper>
 
+          {/* PRICE */}
           <CreateAdInputWrapper>
             <AdInputLabel>Preço</AdInputLabel>
             <Controller 
@@ -209,16 +234,19 @@ export function CreateAd() {
             {errors.price && <ErrorMsg>{isNaN(watch('price')) ? 'Preço precisa ser preenchido' : errors.price.message}</ErrorMsg>}
           </CreateAdInputWrapper>
 
+          {/* CITY */}
           <CreateAdInputWrapper>
             <Selector
               handleChanger={handleCityChange}
               cities={cities}
               selectedCity={selectedCity}
               error={!!errors.city}
+              type="city"
             />
             {errors.city && <ErrorMsg>{errors.city.message}</ErrorMsg>}
           </CreateAdInputWrapper>
 
+          {/* NEIGHBORHOOD */}
           <CreateAdInputWrapper>
             <AdInputLabel>Bairro</AdInputLabel>
             <AdInput 
@@ -229,6 +257,7 @@ export function CreateAd() {
             {errors.neighborhood && <p>{errors.neighborhood.message}</p>}
           </CreateAdInputWrapper>
           
+          {/* IMAGES */}
           {
             imagesPreviews.length === 0 && (
               <ImgPreviewContainer>
@@ -295,7 +324,7 @@ export function CreateAd() {
           )}
           {errorMessage && <ErrorMsg>{errorMessage}</ErrorMsg>}
 
-          <button type="submit" id="submit-button">Criar anúncio</button>
+          <button type="submit" id="submit-button">Criar anúncio</button> {/* Submit Button */}
         </form>
       </CreateAdContainer>
       { isLoading && <LoadingCover /> }

@@ -10,9 +10,10 @@ interface ISelector {
   cities: OptionType[]
   selectedCity: string
   error: boolean
+  type: string
 }
 
-export const Selector = ({ handleChanger, cities, selectedCity, error }: ISelector) => {
+export const Selector = ({ handleChanger, cities, selectedCity, error, type }: ISelector) => {
   return (
     <SelectorContainer>
       <SelectLabel htmlFor="selector">
@@ -28,7 +29,7 @@ export const Selector = ({ handleChanger, cities, selectedCity, error }: ISelect
         value={selectedCity}
         onChange={(e) => handleChanger(e.target.value)}
       >
-        <MenuItem value={''} disabled>Selecione um cidade</MenuItem>
+        <MenuItem value={''} disabled>Selecione {type === 'category' ? 'uma categoria' : 'uma cidade'}</MenuItem>
         {
           cities.map((city) => (
             <MenuItem value={city.label} key={city.value}>{city.label}</MenuItem>

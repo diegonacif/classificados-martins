@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
       font-family: "Red Hat Display", sans-serif;
       font-optical-sizing: auto;
 
-      -webkit-tap-highlight-color: ${({ theme }) => theme['chale-rosa']};
+      -webkit-tap-highlight-color: rgba(20, 148, 255, 0.4);
 
       a {
         text-decoration: none;
