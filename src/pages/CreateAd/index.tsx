@@ -219,7 +219,7 @@ export function CreateAd() {
                   decimalSeparator=','
                   decimalScale={2}
                   prefix={'R$ '}
-                  thousandsGroupStyle="lakh"
+                  thousandsGroupStyle="thousand"
                   thousandSeparator="."
                   fixedDecimalScale
                   valueIsNumericString={true}
