@@ -12,9 +12,25 @@ export const AdsItemContainer = styled.div`
   background-color: ${({ theme }) => theme['gray-100']};
   border-radius: 6px;
   color: ${({ theme }) => theme['classi-azul-800']};
-  
+`
+
+export const AdsImageWrapper = styled.div`
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+
   img {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
     width: 100%;
+    height: max-content;
   }
 `
 
@@ -25,5 +41,9 @@ export const AdsItemDescription = styled.span`
   margin-top: 0.5rem;
 `
 export const AdsItemLocation = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
   margin-top: auto;
+  font-size: .875rem;
 `

@@ -1,10 +1,15 @@
-import { Car } from "@phosphor-icons/react";
+import { Icon } from "@phosphor-icons/react";
 import { CategoryBallContainer } from "./styles";
 
-export function CategoryBall() {
+interface CategoryBallProps {
+  icon: Icon;
+  label: string;
+}
+
+export function CategoryBall({ icon: IconComponent, label }: CategoryBallProps) {
   return (
     <CategoryBallContainer>
-      <Car size={36} weight="fill" />
+      <IconComponent size={32} weight="fill" alt={label} />
     </CategoryBallContainer>
   )
 }
