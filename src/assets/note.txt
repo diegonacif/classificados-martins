@@ -1,1 +1,25 @@
 ${({ theme }) => theme['chale-rosa']};
+
+// Criar Função para Atualizar os Campos
+const activateAd = async (adId: string, durationInDays: number) => {
+  const startTime = Timestamp.now();
+  const endTime = Timestamp.fromDate(new Date(startTime.toDate().getTime() + durationInDays * 24 * 60 * 60 * 1000));
+
+  try {
+    await setDoc(doc(db, 'ads', adId), {
+      adStartTime: startTime,
+      adEndTime: endTime,
+      status: 'active' // Atualiza o status para ativo
+    }, { merge: true }); // Usa merge para atualizar apenas os campos específicos
+
+    console.log('Ad activated successfully');
+  } catch (error) {
+    console.error('Erro ao ativar anúncio: ', error);
+  }
+};
+
+// Exemplo de chamada da função activateAd após o pagamento
+const adId = 'id_do_anuncio';
+const planDurationInDays = 30; // Exemplo de plano de 30 dias
+
+activateAd(adId, planDurationInDays);

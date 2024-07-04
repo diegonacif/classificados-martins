@@ -114,6 +114,8 @@ export function CreateAd() {
       createdAt: Timestamp.now(),
       status: 'inactive', // Inicializa o status como 'inactive'
       userId: user.uid, // ID do usuário autenticado
+      adStartTime: null, // Inicializa como null
+      adEndTime: null,   // Inicializa como null
     };
 
     try {
