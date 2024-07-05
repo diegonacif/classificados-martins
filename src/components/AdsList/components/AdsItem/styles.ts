@@ -12,6 +12,8 @@ export const AdsItemContainer = styled.div`
   background-color: ${({ theme }) => theme['gray-100']};
   border-radius: 6px;
   color: ${({ theme }) => theme['classi-azul-800']};
+
+  cursor: pointer;
 `
 
 export const AdsImageWrapper = styled.div`

@@ -1,45 +1,83 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { AdDetailsAder, AdDetailsCarousel, AdDetailsContainer, AdDetailsDescription, AdDetailsLocation, AdDetailsMainInfo, AdsPill } from "./styles";
-// import productExample from "../../assets/productExample.jpg";
 import { Header } from "../../components/Header";
 import { Carousel } from "../../components/Carousel";
+import { useEffect, useState } from "react";
+import { fetchAdById } from "../../services/fetchAdById";
+import { formatPrice } from "../../services/formatPrice";
+
+interface Ad {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  city: string;
+  neighborhood?: string;
+  category: string;
+  images: string[];
+}
+
 export function AdDetails() {
   const { adId } = useParams();
+  const location = useLocation();
+  const [ad, setAd] = useState<Ad | null>(location.state?.ad || null);
+  const [loading, setLoading] = useState(!ad);
+
+  useEffect(() => {
+    if (!ad) {
+      const getAd = async () => {
+        setLoading(true); // Certifica-se de que o loading seja setado para true
+        try {
+          const fetchedAd = await fetchAdById(adId!);
+          setAd(fetchedAd);
+        } catch (error) {
+          console.error("Error fetching ad:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      getAd();
+    }
+  }, [ad, adId]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!ad) {
+    return <p>Anúncio não encontrado</p>;
+  }
 
   return (
     <>
       <Header />
       <AdDetailsContainer>
         <AdDetailsCarousel>
-          <Carousel />
-          {/* <img src={productExample} alt="" /> */}
+          <Carousel images={ad.images} />
         </AdDetailsCarousel>
         <AdDetailsMainInfo>
-          <h3>Fiat uno fire todo original sem detalhes {adId}</h3>
-          <span>R$ 18.990</span>
+          <h3>{ad.title}</h3>
+          <span>{formatPrice(ad.price)}</span>
           <AdsPill>
-            <span>Venda</span>
+            <span>{ad.category}</span>
           </AdsPill>
         </AdDetailsMainInfo>
         <hr />
         <AdDetailsDescription>
           <h4>Descrição</h4>
-          <span>Fiat uno fire zero sem sem detalhes carro de mulher muito novo, todo revisado. Só pegar e andar no ponto de transferir.</span>
+          <span>{ad.description}</span>
         </AdDetailsDescription>
         <hr />
         <AdDetailsLocation>
           <h4>Localização</h4>
           <div className="location-wrapper">
-            <h4>CEP</h4>
-            <span>59150000</span>
-          </div>
-          <div className="location-wrapper">
             <h4>Município</h4>
-            <span>Natal</span>
+            <span>{ad.city}</span>
           </div>
           <div className="location-wrapper">
             <h4>Bairro</h4>
-            <span>Lagoa Nova</span>
+            <span>{ad.neighborhood ? ad.neighborhood : '-'}</span>
           </div>
         </AdDetailsLocation>
         <AdDetailsAder>
